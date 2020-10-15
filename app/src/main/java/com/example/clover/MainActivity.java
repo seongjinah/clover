@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toolbar;
 
@@ -52,7 +53,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         /*Button*/
         button = findViewById(R.id.button_main);
-        Intent intent = new Intent(MainActivity.this, WisewordActivity.class);
+        button.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, WisewordActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
