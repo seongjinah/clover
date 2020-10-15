@@ -29,4 +29,21 @@
         app:navigationIcon="@drawable/navigation_button"
         android:padding="20dp"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_worrythrow"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/womanflower"
+        android:padding="20dp"
+        android:text="힐링일기"
+        android:textStyle="bold"
+        android:textSize="30dp" />
+
+    </RelativeLayout>
+
 </androidx.drawerlayout.widget.DrawerLayout>

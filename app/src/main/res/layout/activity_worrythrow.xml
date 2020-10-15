@@ -29,4 +29,59 @@
         app:navigationIcon="@drawable/navigation_button"
         android:padding="20dp"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/title_worrythrow"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/womanflower"
+            android:padding="20dp"
+            android:text="고민 버리기"
+            android:textStyle="bold"
+            android:textSize="30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview_worrythrow"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/title_worrythrow"
+            android:fontFamily="@font/womanflower"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="40dp"
+            android:text="당신의 오늘은 만족스러운 하루였나요?당신의 크고 작은 고민들 또는 누군가 들어줬으면 하는 이야기들이 있다면 여기에 털어놓으세요.당신의 마음은 가벼워질 것입니다."
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:lineSpacingExtra="10dp"
+            android:gravity="center"/>
+
+        <EditText
+            android:layout_width="320dp"
+            android:layout_height="280dp"
+            android:id="@+id/edittext_worrythrow"
+            android:layout_below="@+id/textview_worrythrow"
+            android:background="@color/colorPrimaryLight"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:hint="고민을 적어보세요"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:fontFamily="@font/womanflower"
+            android:textSize="22dp"/>
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/trashcan"
+            android:layout_below="@+id/edittext_worrythrow"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"/>
+    </RelativeLayout>
+
 </androidx.drawerlayout.widget.DrawerLayout>
