@@ -8,8 +8,8 @@
     tools:context=".MainActivity"
     android:id="@+id/drawerlayout"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
-
+    tools:openDrawer="start"
+    android:background="@color/colorPrimary">
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
@@ -26,6 +26,44 @@
         android:id="@+id/toolbar_main"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:navigationIcon="@drawable/navigation_button"/>
+        app:navigationIcon="@drawable/navigation_button"
+        android:padding="20dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:background="@color/colorPrimaryLight"
+                android:text="흔들리지 않고 피는 꽃이 어디 있으랴"
+                android:textSize="30dp"
+                android:gravity="center"
+                android:padding="20dp"
+                android:fontFamily="@font/womanflower"/>
+
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:id="@+id/button_main"
+                android:layout_marginTop="15dp"
+                android:text="MORE"
+                android:fontFamily="@font/womanflower"
+                android:textSize="30dp"
+                android:background="@drawable/edge"
+                android:textColor="#ffffff"
+                android:textStyle="bold"/>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
