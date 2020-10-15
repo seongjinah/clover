@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="Home"
+            android:icon="@drawable/home"/>
+
+        <item
+            android:id="@+id/nav_wiseword"
+            android:title="힐링글귀"
+            android:icon="@drawable/letter2"/>
+
+        <item
+            android:id="@+id/nav_diary"
+            android:title="힐링일기"
+            android:icon="@drawable/diary2"/>
+
+        <item
+            android:id="@+id/nav_wrongthrow"
+            android:title="고민버리기"
+            android:icon="@drawable/trashcan"/>
+
+        <item
+            android:id="@+id/nav_logout"
+            android:title="Logout"
+            android:icon="@drawable/logout"/>
+    </group>
+</menu>
