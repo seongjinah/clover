@@ -53,7 +53,6 @@ public class SignupActivity extends AppCompatActivity {
                 checkid(id);
                 checkpw(pw);
                 if(isValid) {
-                    Log.d("1111","123456789");
                     signupUser(id, pw);
                 }
             }
@@ -81,11 +80,9 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void signupUser(final String id, String pw){
-        Log.d("1234",""+id+pw);
         mAuth.createUserWithEmailAndPassword(id,pw).addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                Log.d("1111","마바사");
                 if(task.isSuccessful()){
                     User userData=new User(id);
                     mDatabase.getReference().child("Users").push().setValue(userData);
@@ -95,11 +92,9 @@ public class SignupActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
                                 Toast.makeText(SignupActivity.this,"이메일 전송 성공",Toast.LENGTH_SHORT).show();
-                                Log.d("이메일 전송","성공공공");
                             }
                             else{
                                 Toast.makeText(SignupActivity.this,"이메일 전송 실패",Toast.LENGTH_SHORT).show();
-                                Log.d("이메일 전송","실패패패");
                             }
                         }
                     });
@@ -109,13 +104,12 @@ public class SignupActivity extends AppCompatActivity {
                         if (!emailVerified) {
                             Toast.makeText(SignupActivity.this,"이메일 인증 후 사용해주세요",Toast.LENGTH_SHORT).show();
                         }
-                        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                     }
                 }
                 else{
-                    Log.d("1111","가난다");
                     Toast.makeText(SignupActivity.this,"회원가입 실패",Toast.LENGTH_SHORT).show();
                 }
             }
