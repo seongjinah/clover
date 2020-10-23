@@ -2,6 +2,7 @@ package com.example.clover;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button button_signin,button_signup,button_chgpw;
+    Button button_signin,button_signup,button_chgpw,button_saying;
     EditText edit_id,edit_pw;
 
     FirebaseDatabase Database = FirebaseDatabase.getInstance();
@@ -36,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         button_signin=(Button)findViewById(R.id.button_signin);
         button_signup=(Button)findViewById(R.id.button_signup);
         button_chgpw=(Button)findViewById(R.id.button_chgpw);
+        button_saying=(Button)findViewById(R.id.button_saying);
 
         button_signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +81,15 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             });
                 }
+            }
+        });
+
+        button_saying.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, PushWiseActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
