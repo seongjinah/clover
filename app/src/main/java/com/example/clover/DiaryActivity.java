@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -44,6 +46,7 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
         navigationView.setNavigationItemSelectedListener(this);
 
         navigationView.setCheckedItem(R.id.nav_home);
+
     }
 
     @Override
@@ -71,6 +74,13 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void go_writediary(View v){
+        Intent intent = new Intent(DiaryActivity.this, WritediaryActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }
 
 
