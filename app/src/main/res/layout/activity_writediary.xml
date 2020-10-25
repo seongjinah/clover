@@ -99,6 +99,20 @@
                 android:background="@drawable/edge"
                 android:textColor="#ffffff"
                 android:textStyle="bold"/>
+
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:id="@+id/button_delete"
+                android:layout_marginTop="15dp"
+                android:text="삭제하기"
+                android:fontFamily="@font/womanflower"
+                android:onClick="delete"
+                android:textSize="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/edge"
+                android:textColor="#ffffff"
+                android:textStyle="bold"/>
         </LinearLayout>
 
 

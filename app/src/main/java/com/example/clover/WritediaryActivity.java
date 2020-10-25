@@ -31,6 +31,7 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
     NavigationView navigationView;
     androidx.appcompat.widget.Toolbar toolbar;
 
+    String str_id;
     String str_date;
     String str_title;
     String str_write;
@@ -69,16 +70,43 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
 
         navigationView.setCheckedItem(R.id.nav_home);
 
+        Intent it = getIntent();
+        str_id = it.getStringExtra("it_id");
+
         /*Edit text*/
         et_title = (EditText)findViewById(R.id.edittext_title);
         et_date = (EditText)findViewById(R.id.edittext_date);
         et_write = (EditText)findViewById(R.id.edittext_write);
 
-        long now = System.currentTimeMillis();
-        Date mDate = new Date(now);
-        SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
-        str_date = simpleDate.format(mDate);
-        et_date.setText(str_date);
+        if(!str_id.equals("null")){
+            mDatabaseReference.child("Diary").child(str_id).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Article article = dataSnapshot.getValue(Article.class);
+                    str_title = article.gettitle();
+                    str_date = article.getdate();
+                    str_write = article.getwrite();
+                    et_title.setText(str_title);
+                    et_date.setText(str_date);
+                    et_write.setText(str_write);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.w("TAG: ", "Failed to read value", databaseError.toException());
+                }
+
+            });
+
+        }
+        else{
+            long now = System.currentTimeMillis();
+            Date mDate = new Date(now);
+            SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
+            str_date = simpleDate.format(mDate);
+            et_date.setText(str_date);
+        }
+
     }
 
     @Override
@@ -125,9 +153,9 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
 
     public void register(View v){
 
-        final String str_title = et_title.getText().toString().trim();
-        final String str_date = et_date.getText().toString().trim();
-        final String str_write = et_write.getText().toString().trim();
+        str_title = et_title.getText().toString().trim();
+        str_date = et_date.getText().toString().trim();
+        str_write = et_write.getText().toString().trim();
 
         if(str_title.equals("")){
             Toast.makeText(this, "제목을 입력하세요", Toast.LENGTH_SHORT).show();
@@ -144,13 +172,17 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
             return;
         }
 
+        if(str_id.equals("null")){
+            Long now1 = System.currentTimeMillis();
+            str_id = now1.toString();
+        }
+
         mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Long now1 = System.currentTimeMillis();
-                String now = now1.toString();
-                diary_data data = new diary_data(now,str_title,str_date,str_write);
-                mDatabaseReference.child("Diary").child(Long.toString(now1)).setValue(data);
+
+                diary_data data = new diary_data(str_id,str_title,str_date,str_write);
+                mDatabaseReference.child("Diary").child(str_id).setValue(data);
                 Log.d("일기","성공"+str_title);
             }
 
@@ -160,6 +192,27 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
             }
         });
 
+        Intent it = new Intent(WritediaryActivity.this, DiaryActivity.class);
+        startActivity(it);
+        finish();
+    }
+
+    public void delete(View v){
+        mDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mDatabaseReference.child("Diary").child(str_id).removeValue();
+                Log.d("일기","성공"+str_title);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("일기","실패");
+            }
+        });
+        Intent it = new Intent(WritediaryActivity.this, DiaryActivity.class);
+        startActivity(it);
+        finish();
     }
 
 }

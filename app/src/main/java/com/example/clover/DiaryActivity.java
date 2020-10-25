@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -72,34 +74,94 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
 
 
         /*일기 리스트*/
-        mContext=this;
+        mContext = this;
         final ArrayList<Article> articleList = new ArrayList<>();
-        recyclerView=(RecyclerView)findViewById(R.id.diary_Recycler);
+        recyclerView = (RecyclerView) findViewById(R.id.diary_Recycler);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(mContext);
         recyclerView.setLayoutManager(layoutManager);
 
-
-        Article article = new Article("a","b","c","d");
-        articleList.add(article);
-        /*mDatabaseReference.child("Diary").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabaseReference.child("Diary").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Article article = postSnapshot.getValue(Article.class);
                     articleList.add(article);
                 }
-
+                mAdapter = new ArticleAdapter(articleList);
+                recyclerView.setAdapter(mAdapter);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.w("TAG: ", "Failed to read value", databaseError.toException());
             }
 
-        });*/
+        });
 
         mAdapter = new ArticleAdapter(articleList);
         recyclerView.setAdapter(mAdapter);
+        Toast.makeText(DiaryActivity.this, "생성완료", Toast.LENGTH_SHORT).show();
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
+            public void onClick(View view, int position) {
+                Article article = articleList.get(position);
+                Intent intent;
+                intent = new Intent(DiaryActivity.this, WritediaryActivity.class);
+                intent.putExtra("it_id",article.getid());
+                startActivity(intent);
+                return;
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                return;
+            }
+        }));
+
+    }
+
+    public interface ClickListener {
+        void onClick(View view, int position);
+
+        void onLongClick(View view, int position);
+    }
+
+    public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+
+        private GestureDetector gestureDetector;
+        private DiaryActivity.ClickListener clickListener;
+
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final DiaryActivity.ClickListener clickListener) {
+            this.clickListener = clickListener;
+            gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+                }
+            });
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+            View child = rv.findChildViewUnder(e.getX(), e.getY());
+            if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
+                clickListener.onClick(child, rv.getChildAdapterPosition(child));
+            }
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+        }
     }
 
     @Override
@@ -130,9 +192,11 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
 
     public void go_writediary(View v){
         Intent intent = new Intent(DiaryActivity.this, WritediaryActivity.class);
+        intent.putExtra("it_id","null");
         startActivity(intent);
         finish();
     }
+
 
 }
 
