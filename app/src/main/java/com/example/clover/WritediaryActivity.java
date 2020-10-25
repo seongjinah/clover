@@ -90,6 +90,8 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
                 break;
 
             case R.id.nav_diary:
+                Intent intent1 = new Intent(WritediaryActivity.this, DiaryActivity.class);
+                startActivity(intent1);
                 break;
 
             case R.id.nav_wiseword:
@@ -108,12 +110,12 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
     }
 
     public class diary_data{
-        public long id;
+        public String id;
         public String title;
         public String date;
         public String write;
 
-        public diary_data(Long id, String title,String date,String write){
+        public diary_data(String id, String title,String date,String write){
             this.id = id;
             this.title = title;
             this.date = date;
@@ -146,7 +148,8 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Long now1 = System.currentTimeMillis();
-                diary_data data = new diary_data(now1,str_title,str_date,str_write);
+                String now = now1.toString();
+                diary_data data = new diary_data(now,str_title,str_date,str_write);
                 mDatabaseReference.child("Diary").child(Long.toString(now1)).setValue(data);
                 Log.d("일기","성공"+str_title);
             }
