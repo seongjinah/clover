@@ -10,12 +10,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -192,9 +194,36 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
             }
         });
 
-        Intent it = new Intent(WritediaryActivity.this, DiaryActivity.class);
-        startActivity(it);
-        finish();
+        mDatabaseReference.child("Diary").child(str_id).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Intent it = new Intent(WritediaryActivity.this, DiaryActivity.class);
+                startActivity(it);
+                finish();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Intent it = new Intent(WritediaryActivity.this, DiaryActivity.class);
+                startActivity(it);
+                finish();
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void delete(View v){
@@ -210,9 +239,36 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
                 Log.d("일기","실패");
             }
         });
-        Intent it = new Intent(WritediaryActivity.this, DiaryActivity.class);
-        startActivity(it);
-        finish();
+
+        mDatabaseReference.child("Diary").child(str_id).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                Intent it = new Intent(WritediaryActivity.this, DiaryActivity.class);
+                startActivity(it);
+                finish();
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
 }

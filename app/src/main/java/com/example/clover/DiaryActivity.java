@@ -110,6 +110,7 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
                 intent = new Intent(DiaryActivity.this, WritediaryActivity.class);
                 intent.putExtra("it_id",article.getid());
                 startActivity(intent);
+                finish();
                 return;
             }
 
