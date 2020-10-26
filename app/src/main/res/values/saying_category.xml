@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="saying_category">
+        <item>도레미</item>
+        <item>파솔라</item>
+        <item>시도도도도</item>
+    </string-array>
+</resources>

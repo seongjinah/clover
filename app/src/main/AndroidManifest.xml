@@ -11,15 +11,17 @@
         android:theme="@style/AppTheme">
         <activity android:name=".PushWiseActivity"></activity>
         <activity android:name=".SignupActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".DiaryActivity" />
         <activity android:name=".WritediaryActivity" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".WisewordActivity" />
         <activity android:name=".WorryThrowActivity" />
