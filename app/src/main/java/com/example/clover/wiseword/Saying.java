@@ -1,4 +1,4 @@
-package com.example.clover;
+package com.example.clover.wiseword;
 
 public class Saying {
     private String saying;
@@ -11,7 +11,7 @@ public class Saying {
         //category="";
     }
 
-    Saying(String saying, String author/*, String category*/){
+    public Saying(String saying, String author/*, String category*/){
         this.saying=saying;
         this.author=author;
         //this.category=category;

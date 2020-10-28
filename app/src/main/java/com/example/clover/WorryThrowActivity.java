@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.clover.wiseword.WisewordActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class WorryThrowActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -50,18 +51,19 @@ public class WorryThrowActivity extends AppCompatActivity implements NavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.nav_home:
-                Intent intent = new Intent(WorryThrowActivity.this, MainActivity.class);
-                startActivity(intent);
+                finish();
                 break;
 
             case R.id.nav_diary:
                 Intent intent3 = new Intent(WorryThrowActivity.this, DiaryActivity.class);
                 startActivity(intent3);
+                finish();
                 break;
 
             case R.id.nav_wiseword:
                 Intent intent2 = new Intent(WorryThrowActivity.this, WisewordActivity.class);
                 startActivity(intent2);
+                finish();
                 break;
 
             case R.id.nav_wrongthrow:

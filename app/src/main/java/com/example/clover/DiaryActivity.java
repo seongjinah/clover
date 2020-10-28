@@ -9,8 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +19,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clover.wiseword.WisewordActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +28,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class DiaryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -169,8 +167,7 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.nav_home:
-                Intent intent = new Intent(DiaryActivity.this, MainActivity.class);
-                startActivity(intent);
+                finish();
                 break;
 
             case R.id.nav_diary:
@@ -179,11 +176,13 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
             case R.id.nav_wiseword:
                 Intent intent2 = new Intent(DiaryActivity.this, WisewordActivity.class);
                 startActivity(intent2);
+                finish();
                 break;
 
             case R.id.nav_wrongthrow:
                 Intent intent3 = new Intent(DiaryActivity.this, WorryThrowActivity.class);
                 startActivity(intent3);
+                finish();
                 break;
         }
 
