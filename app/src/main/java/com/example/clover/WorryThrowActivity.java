@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -23,6 +25,8 @@ public class WorryThrowActivity extends AppCompatActivity implements NavigationV
     private FirebaseAuth mAuth= FirebaseAuth.getInstance();
     String userEmail;
 
+    EditText et_worry;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,8 @@ public class WorryThrowActivity extends AppCompatActivity implements NavigationV
         drawerLayout = findViewById(R.id.drawerlayout_worrythrow);
         navigationView = findViewById(R.id.navigationview_worrythrow);
         toolbar = findViewById(R.id.toolbar_worrythrow);
+
+        et_worry = (EditText)findViewById(R.id.edittext_worrythrow);
 
         /*Tool Bar*/
         setSupportActionBar(toolbar);
@@ -87,5 +93,9 @@ public class WorryThrowActivity extends AppCompatActivity implements NavigationV
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void delete_worry(View v){
+        et_worry.setText("");
     }
 }

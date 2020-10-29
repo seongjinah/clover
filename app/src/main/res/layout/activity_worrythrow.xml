@@ -79,6 +79,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/trashcan"
+            android:onClick="delete_worry"
             android:layout_below="@+id/edittext_worrythrow"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"/>
