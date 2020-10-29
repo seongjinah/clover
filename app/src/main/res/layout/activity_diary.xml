@@ -46,15 +46,13 @@
                 android:padding="20dp"
                 android:text="힐링일기"
                 android:layout_gravity="center|top"
-                android:textStyle="bold"
                 android:textSize="30dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/diary_Recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:background="@drawable/green_round_rectangle"/>
+                />
 
             <Button
                 android:layout_width="300dp"

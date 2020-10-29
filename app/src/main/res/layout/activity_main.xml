@@ -42,6 +42,7 @@
             <TextView
                 android:layout_width="300dp"
                 android:layout_height="300dp"
+                android:id="@+id/main_random_text"
                 android:background="@color/colorPrimaryLight"
                 android:text="흔들리지 않고 피는 꽃이 어디 있으랴"
                 android:textSize="30dp"

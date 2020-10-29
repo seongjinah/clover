@@ -48,7 +48,6 @@
                 android:padding="20dp"
                 android:text="힐링일기쓰기"
                 android:layout_gravity="center|top"
-                android:textStyle="bold"
                 android:textSize="30dp" />
 
             <EditText

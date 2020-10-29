@@ -8,14 +8,25 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.clover.wiseword.Saying;
 import com.example.clover.wiseword.WisewordActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -25,6 +36,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth mAuth= FirebaseAuth.getInstance();
     String userEmail;
     Button button;
+    TextView random_wiseword;
+    String str_wiseword;
+    int random1;
+    FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference mDatabaseReference = mDatabase.getReference();
+    ArrayList<String> wiseword_category = new ArrayList<String>(Arrays.asList("자신감", "행복", "희망", "사랑"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +81,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             }
         });
+        int random = (int)(Math.random()*4);
+        String str_category = wiseword_category.get(random);
+        mDatabaseReference.child("Wise_Saying").child(str_category).addListenerForSingleValueEvent(new ValueEventListener() {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long size = snapshot.getChildrenCount();
+                random1 = (int)(Math.random()*size);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+
+        });
+
+        mDatabaseReference.child("Wise_Saying").child(str_category).addListenerForSingleValueEvent(new ValueEventListener() {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long size = snapshot.getChildrenCount();
+                int random1 = (int)(Math.random()*size);
+                Saying tmp = snapshot.child(String.valueOf(random1)).getValue(Saying.class);
+                str_wiseword = tmp.getSaying();
+                random_wiseword.setText(str_wiseword);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+
+        });
+
+        //random으로 명언 띄우기
+        random_wiseword = findViewById(R.id.main_random_text);
     }
 
     @Override

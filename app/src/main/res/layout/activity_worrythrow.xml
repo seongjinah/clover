@@ -42,7 +42,6 @@
             android:fontFamily="@font/womanflower"
             android:padding="20dp"
             android:text="고민 버리기"
-            android:textStyle="bold"
             android:textSize="30dp" />
 
         <TextView

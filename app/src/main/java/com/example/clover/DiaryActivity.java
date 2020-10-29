@@ -213,7 +213,6 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
         intent.putExtra("it_id","null");
         intent.putExtra("userEmail",userEmail);
         startActivity(intent);
-        finish();
     }
 
 

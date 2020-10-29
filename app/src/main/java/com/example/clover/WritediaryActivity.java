@@ -123,24 +123,28 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
                 Intent intent0 = new Intent(WritediaryActivity.this, MainActivity.class);
                 intent0.putExtra("userEmail",userEmail);
                 startActivity(intent0);
+                finish();
                 break;
 
             case R.id.nav_diary:
                 Intent intent1 = new Intent(WritediaryActivity.this, DiaryActivity.class);
                 intent1.putExtra("userEmail",userEmail);
                 startActivity(intent1);
+                finish();
                 break;
 
             case R.id.nav_wiseword:
                 Intent intent2 = new Intent(WritediaryActivity.this, WisewordActivity.class);
                 intent2.putExtra("userEmail",userEmail);
                 startActivity(intent2);
+                finish();
                 break;
 
             case R.id.nav_wrongthrow:
                 Intent intent3 = new Intent(WritediaryActivity.this, WorryThrowActivity.class);
                 intent3.putExtra("userEmail",userEmail);
                 startActivity(intent3);
+                finish();
                 break;
 
             case R.id.nav_logout:
