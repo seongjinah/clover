@@ -111,7 +111,7 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
             SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
             str_date = simpleDate.format(mDate);
             et_date.setText(str_date);
-            et_date.setText(userEmail);
+            //et_date.setText(userEmail);
         }
 
     }
@@ -161,12 +161,14 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
         public String title;
         public String date;
         public String write;
+        public String userEmail;
 
-        public diary_data(String id, String title,String date,String write){
+        public diary_data(String id, String title,String date,String write,String userEmail){
             this.id = id;
             this.title = title;
             this.date = date;
             this.write = write;
+            this.userEmail = userEmail;
         }
     }
 
@@ -200,7 +202,7 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                diary_data data = new diary_data(str_id,str_title,str_date,str_write);
+                diary_data data = new diary_data(str_id,str_title,str_date,str_write,userEmail);
                 mDatabaseReference.child("Diary").child(str_id).setValue(data);
                 Log.d("일기","성공"+str_title);
             }

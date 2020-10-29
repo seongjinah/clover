@@ -89,7 +89,9 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Article article = postSnapshot.getValue(Article.class);
-                    articleList.add(article);
+                    if(article.getuserEmail().equals(userEmail)) {
+                        articleList.add(article);
+                    }
                 }
                 mAdapter = new ArticleAdapter(articleList);
                 recyclerView.setAdapter(mAdapter);

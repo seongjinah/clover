@@ -9,19 +9,22 @@ public class Article {
     private String date;
     private String title;
     private String write;
+    private String userEmail;
 
     Article() {
         id = "";
         date = "";
         title = "";
         write = "";
+        userEmail = "";
     }
 
-    Article(String id, String date, String title, String write) {
+    Article(String id, String date, String title, String write,String userEmail) {
         this.id = id;
         this.date = date;
         this.title = title;
         this.write = write;
+        this.userEmail = userEmail;
     }
 
     public String getid() {
@@ -54,6 +57,14 @@ public class Article {
 
     public void setwrite(String write) {
         this.write = write;
+    }
+
+    public String getuserEmail() {
+        return userEmail;
+    }
+
+    public void setuserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
 
