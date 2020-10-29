@@ -13,7 +13,6 @@
         <activity android:name=".wiseword.HopeActivity" />
         <activity android:name=".wiseword.HappyActivity" />
         <activity android:name=".wiseword.ConfidenceActivity" />
-        <activity android:name=".PushWiseActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>

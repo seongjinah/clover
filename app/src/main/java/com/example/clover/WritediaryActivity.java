@@ -18,6 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.clover.wiseword.WisewordActivity;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,6 +39,7 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
     String str_date;
     String str_title;
     String str_write;
+    String userEmail;
 
     EditText et_title;
     EditText et_date;
@@ -45,6 +47,7 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
 
     FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     DatabaseReference mDatabaseReference = mDatabase.getReference();
+    private FirebaseAuth mAuth= FirebaseAuth.getInstance();
 
 
     @Override
@@ -63,7 +66,6 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
         /*Navigation Drawer Menu*/
         //Hide or show item
         Menu menu = navigationView.getMenu();
-        menu.findItem(R.id.nav_logout).setVisible(false);
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigations_drawer_open, R.string.navigations_drawer_close);
@@ -75,6 +77,7 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
 
         Intent it = getIntent();
         str_id = it.getStringExtra("it_id");
+        userEmail = it.getStringExtra("userEmail");
 
         /*Edit text*/
         et_title = (EditText)findViewById(R.id.edittext_title);
@@ -108,6 +111,7 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
             SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
             str_date = simpleDate.format(mDate);
             et_date.setText(str_date);
+            et_date.setText(userEmail);
         }
 
     }
@@ -116,23 +120,35 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.nav_home:
-                Intent intent = new Intent(WritediaryActivity.this, MainActivity.class);
-                startActivity(intent);
+                Intent intent0 = new Intent(WritediaryActivity.this, MainActivity.class);
+                intent0.putExtra("userEmail",userEmail);
+                startActivity(intent0);
                 break;
 
             case R.id.nav_diary:
                 Intent intent1 = new Intent(WritediaryActivity.this, DiaryActivity.class);
+                intent1.putExtra("userEmail",userEmail);
                 startActivity(intent1);
                 break;
 
             case R.id.nav_wiseword:
                 Intent intent2 = new Intent(WritediaryActivity.this, WisewordActivity.class);
+                intent2.putExtra("userEmail",userEmail);
                 startActivity(intent2);
                 break;
 
             case R.id.nav_wrongthrow:
                 Intent intent3 = new Intent(WritediaryActivity.this, WorryThrowActivity.class);
+                intent3.putExtra("userEmail",userEmail);
                 startActivity(intent3);
+                break;
+
+            case R.id.nav_logout:
+                mAuth.signOut();
+                Intent intent4 = new Intent(WritediaryActivity.this,LoginActivity.class);
+                intent4.putExtra("userEmail",userEmail);
+                startActivity(intent4);
+                finish();
                 break;
         }
 
@@ -199,6 +215,7 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Intent it = new Intent(WritediaryActivity.this, DiaryActivity.class);
+                it.putExtra("userEmail",userEmail);
                 startActivity(it);
                 finish();
             }
@@ -206,6 +223,7 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Intent it = new Intent(WritediaryActivity.this, DiaryActivity.class);
+                it.putExtra("userEmail",userEmail);
                 startActivity(it);
                 finish();
             }
@@ -255,6 +273,7 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
                 Intent it = new Intent(WritediaryActivity.this, DiaryActivity.class);
+                it.putExtra("userEmail",userEmail);
                 startActivity(it);
                 finish();
             }

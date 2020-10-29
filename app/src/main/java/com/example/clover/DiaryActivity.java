@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clover.wiseword.WisewordActivity;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,8 +43,10 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
     private RecyclerView.LayoutManager layoutManager;
     FirebaseDatabase Database = FirebaseDatabase.getInstance();
     DatabaseReference mDatabaseReference = Database.getReference();
+    private FirebaseAuth mAuth= FirebaseAuth.getInstance();
 
     public User user;
+    String userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +61,12 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
         /*Tool Bar*/
         setSupportActionBar(toolbar);
 
+        Intent it = getIntent();
+        userEmail = it.getStringExtra("userEmail");
+
         /*Navigation Drawer Menu*/
         //Hide or show item
         Menu menu = navigationView.getMenu();
-        menu.findItem(R.id.nav_logout).setVisible(false);
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigations_drawer_open, R.string.navigations_drawer_close);
@@ -107,6 +112,7 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
                 Intent intent;
                 intent = new Intent(DiaryActivity.this, WritediaryActivity.class);
                 intent.putExtra("it_id",article.getid());
+                intent.putExtra("userEmail",userEmail);
                 startActivity(intent);
                 finish();
                 return;
@@ -175,13 +181,23 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
 
             case R.id.nav_wiseword:
                 Intent intent2 = new Intent(DiaryActivity.this, WisewordActivity.class);
+                intent2.putExtra("userEmail",userEmail);
                 startActivity(intent2);
                 finish();
                 break;
 
             case R.id.nav_wrongthrow:
                 Intent intent3 = new Intent(DiaryActivity.this, WorryThrowActivity.class);
+                intent3.putExtra("userEmail",userEmail);
                 startActivity(intent3);
+                finish();
+                break;
+
+            case R.id.nav_logout:
+                mAuth.signOut();
+                Intent intent4 = new Intent(DiaryActivity.this,LoginActivity.class);
+                intent4.putExtra("userEmail",userEmail);
+                startActivity(intent4);
                 finish();
                 break;
         }
@@ -193,6 +209,7 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
     public void go_writediary(View v){
         Intent intent = new Intent(DiaryActivity.this, WritediaryActivity.class);
         intent.putExtra("it_id","null");
+        intent.putExtra("userEmail",userEmail);
         startActivity(intent);
         finish();
     }

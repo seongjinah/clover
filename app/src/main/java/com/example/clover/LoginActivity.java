@@ -21,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button button_signin,button_signup,button_chgpw,button_saying;
+    Button button_signin,button_signup,button_chgpw;
     EditText edit_id,edit_pw;
 
     FirebaseDatabase Database = FirebaseDatabase.getInstance();
@@ -37,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         button_signin=(Button)findViewById(R.id.button_signin);
         button_signup=(Button)findViewById(R.id.button_signup);
         button_chgpw=(Button)findViewById(R.id.button_chgpw);
-        button_saying=(Button)findViewById(R.id.button_saying);
 
         button_signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,21 +83,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        button_saying.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, PushWiseActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
     }
     public void Emailcheck(FirebaseUser user){
         if(user!=null){
             boolean emailVerified=user.isEmailVerified();
             if(emailVerified){
+                Log.d("useremail : ",user.getEmail());
                 Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                intent.putExtra("userEmail",user.getEmail());
                 startActivity(intent);
                 finish();
             }
