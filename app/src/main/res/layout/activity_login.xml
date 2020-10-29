@@ -2,37 +2,86 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/clover4"
+        android:layout_gravity="center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="세잎클로버"
+        android:fontFamily="@font/font"
+        android:textSize="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center" />
 
     <EditText
         android:id="@+id/edit_id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email" />
+        android:layout_height="40dp"
+        android:background="@drawable/green_white_filled_rectangle"
+        android:hint="Email"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:padding="10dp"
+        android:fontFamily="@font/font"/>
 
     <EditText
         android:id="@+id/edit_pw"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/green_white_filled_rectangle"
         android:hint="PASSWORD"
-        android:inputType="textPassword" />
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:padding="10dp"
+        android:inputType="textPassword"
+        android:fontFamily="@font/font"/>
 
     <Button
         android:id="@+id/button_signin"
         android:layout_width="match_parent"
+        android:background="@drawable/green_filled_rectangle"
         android:layout_height="wrap_content"
-        android:text="로그인" />
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:text="로그인"
+        android:textSize="20dp"
+        android:textColor="#fff"
+        android:fontFamily="@font/font"/>
 
     <Button
         android:id="@+id/button_signup"
+        android:background="@drawable/green_filled_rectangle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="회원가입" />
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:textSize="20dp"
+        android:text="회원가입"
+        android:textColor="#fff"
+        android:fontFamily="@font/font"/>
 
     <Button
         android:id="@+id/button_chgpw"
         android:layout_width="match_parent"
+        android:background="@drawable/green_filled_rectangle"
         android:layout_height="wrap_content"
-        android:text="비밀번호 재설정" />
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:text="비밀번호 재설정"
+        android:textSize="20dp"
+        android:textColor="#fff"
+        android:fontFamily="@font/font"/>
 
 </LinearLayout>

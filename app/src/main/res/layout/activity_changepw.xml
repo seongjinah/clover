@@ -5,17 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ChangepwActivity">
+    tools:context=".ChangepwActivity"
+    android:gravity="center_vertical"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이메일을 입력하십시오"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:textColor="#fff"
+        android:fontFamily="@font/font"/>
 
     <EditText
         android:id="@+id/edit_re_email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:fontFamily="@font/font"
+        android:background="@drawable/green_white_filled_rectangle"
+        android:padding="10dp"
         android:hint="Email" />
 
     <Button
         android:id="@+id/btn_resend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="비밀번호 재설정" />
+        android:fontFamily="@font/font"
+        android:text="비밀번호 재설정 이메일 전송"
+        android:textColor="#fff"
+        android:textSize="20dp"
+        android:background="@drawable/green_filled_rectangle"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"/>
 </LinearLayout>
