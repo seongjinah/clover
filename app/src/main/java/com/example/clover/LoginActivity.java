@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
 
     Button button_signin,button_signup,button_chgpw;
     EditText edit_id,edit_pw;
+    ImageView Logo;
 
     FirebaseDatabase Database = FirebaseDatabase.getInstance();
     DatabaseReference mDatabaseReference = Database.getReference();
@@ -37,13 +41,17 @@ public class LoginActivity extends AppCompatActivity {
         button_signin=(Button)findViewById(R.id.button_signin);
         button_signup=(Button)findViewById(R.id.button_signup);
         button_chgpw=(Button)findViewById(R.id.button_chgpw);
+        Logo=(ImageView)findViewById(R.id.Login_img);
+
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate);
+        Logo.startAnimation(animation);
 
         button_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,SignupActivity.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
         button_chgpw.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, ChangepwActivity.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
 

@@ -7,10 +7,12 @@
     android:background="@color/colorPrimary">
 
     <ImageView
+        android:id="@+id/Login_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/clover4"
         android:layout_gravity="center"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

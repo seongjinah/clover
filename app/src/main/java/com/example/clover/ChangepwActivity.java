@@ -43,8 +43,8 @@ public class ChangepwActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
                                 Toast.makeText(ChangepwActivity.this,"이메일 전송 성공.",Toast.LENGTH_SHORT).show();
-                                Intent intent=new Intent(ChangepwActivity.this,MainActivity.class);
-                                startActivity(intent);
+                                /*Intent intent=new Intent(ChangepwActivity.this,MainActivity.class);
+                                startActivity(intent);*/
                                 finish();
                             }
                             else{
