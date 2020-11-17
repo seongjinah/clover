@@ -58,8 +58,6 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
         navigationView = findViewById(R.id.navigationview_diary);
         toolbar = findViewById(R.id.toolbar_diary);
 
-        /*Tool Bar*/
-        setSupportActionBar(toolbar);
 
         Intent it = getIntent();
         userEmail = it.getStringExtra("userEmail");

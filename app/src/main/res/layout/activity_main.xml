@@ -59,8 +59,7 @@
                 android:fontFamily="@font/womanflower"
                 android:textSize="30dp"
                 android:background="@drawable/edge"
-                android:textColor="#ffffff"
-                android:textStyle="bold"/>
+                android:textColor="#ffffff"/>
 
 
         </LinearLayout>

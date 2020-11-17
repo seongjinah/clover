@@ -53,9 +53,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.navigationview);
         toolbar = findViewById(R.id.toolbar_main);
 
-        /*Tool Bar*/
-        setSupportActionBar(toolbar);
-
         Intent it = getIntent();
         userEmail = it.getStringExtra("userEmail");
 

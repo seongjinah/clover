@@ -55,7 +55,6 @@
             android:layout_marginRight="50dp"
             android:layout_marginTop="40dp"
             android:text="당신의 오늘은 만족스러운 하루였나요?당신의 크고 작은 고민들 또는 누군가 들어줬으면 하는 이야기들이 있다면 여기에 털어놓으세요.당신의 마음은 가벼워질 것입니다."
-            android:textStyle="bold"
             android:textSize="20dp"
             android:lineSpacingExtra="10dp"
             android:gravity="center"/>

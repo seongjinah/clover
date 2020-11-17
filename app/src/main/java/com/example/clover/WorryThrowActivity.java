@@ -39,9 +39,6 @@ public class WorryThrowActivity extends AppCompatActivity implements NavigationV
 
         et_worry = (EditText)findViewById(R.id.edittext_worrythrow);
 
-        /*Tool Bar*/
-        setSupportActionBar(toolbar);
-
         Intent it = getIntent();
         userEmail = it.getStringExtra("userEmail");
 

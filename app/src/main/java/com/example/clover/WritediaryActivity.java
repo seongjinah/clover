@@ -60,9 +60,6 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
         navigationView = findViewById(R.id.navigationview_diary);
         toolbar = findViewById(R.id.toolbar_diary);
 
-        /*Tool Bar*/
-        setSupportActionBar(toolbar);
-
         /*Navigation Drawer Menu*/
         //Hide or show item
         Menu menu = navigationView.getMenu();

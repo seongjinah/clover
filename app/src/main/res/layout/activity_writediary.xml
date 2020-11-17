@@ -96,8 +96,7 @@
                 android:textSize="30dp"
                 android:layout_gravity="center"
                 android:background="@drawable/edge"
-                android:textColor="#ffffff"
-                android:textStyle="bold"/>
+                android:textColor="#ffffff"/>
 
             <Button
                 android:layout_width="300dp"
@@ -110,8 +109,7 @@
                 android:textSize="30dp"
                 android:layout_gravity="center"
                 android:background="@drawable/edge"
-                android:textColor="#ffffff"
-                android:textStyle="bold"/>
+                android:textColor="#ffffff"/>
         </LinearLayout>
 
 

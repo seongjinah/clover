@@ -48,9 +48,6 @@ public class WisewordActivity extends AppCompatActivity implements NavigationVie
         new TabLayoutMediator(tabLayout, viewPager,
                 (tab, position) -> tab.setText(tab_index.get(position))).attach();
 
-        /*Tool Bar*/
-        setSupportActionBar(toolbar);
-
         /*Navigation Drawer Menu*/
         //Hide or show item
         Menu menu = navigationView.getMenu();

@@ -65,8 +65,7 @@
                 android:onClick="go_writediary"
                 android:layout_gravity="center"
                 android:background="@drawable/edge"
-                android:textColor="#ffffff"
-                android:textStyle="bold"/>
+                android:textColor="#ffffff"/>
 
         </LinearLayout>
 
