@@ -1,9 +1,11 @@
 package com.example.clover;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -236,6 +238,12 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
                 break;
 
             case R.id.nav_logout:
+                SharedPreferences autologin =getSharedPreferences("autologin", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor autologin_editor=autologin.edit();
+                autologin_editor.clear();
+                autologin_editor.commit();
+                Intent music = new Intent(this,MusicService.class);
+                stopService(music);
                 mAuth.signOut();
                 Intent intent4 = new Intent(WritediaryActivity.this,LoginActivity.class);
                 intent4.putExtra("userEmail",userEmail);

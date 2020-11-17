@@ -1,6 +1,8 @@
 package com.example.clover.wiseword;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +16,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.clover.DiaryActivity;
 import com.example.clover.LoginActivity;
+import com.example.clover.MusicService;
 import com.example.clover.R;
 import com.example.clover.WorryThrowActivity;
 import com.example.clover.WritediaryActivity;
@@ -89,6 +92,12 @@ public class WisewordActivity extends AppCompatActivity implements NavigationVie
                 break;
 
             case R.id.nav_logout:
+                SharedPreferences autologin =getSharedPreferences("autologin", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor autologin_editor=autologin.edit();
+                autologin_editor.clear();
+                autologin_editor.commit();
+                Intent music = new Intent(this, MusicService.class);
+                stopService(music);
                 mAuth.signOut();
                 Intent intent4 = new Intent(WisewordActivity.this, LoginActivity.class);
                 startActivity(intent4);

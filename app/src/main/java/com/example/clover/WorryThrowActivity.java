@@ -1,6 +1,8 @@
 package com.example.clover;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -80,6 +82,12 @@ public class WorryThrowActivity extends AppCompatActivity implements NavigationV
                 break;
 
             case R.id.nav_logout:
+                SharedPreferences autologin =getSharedPreferences("autologin", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor autologin_editor=autologin.edit();
+                autologin_editor.clear();
+                autologin_editor.commit();
+                Intent music = new Intent(this,MusicService.class);
+                stopService(music);
                 mAuth.signOut();
                 Intent intent4 = new Intent(WorryThrowActivity.this,LoginActivity.class);
                 intent4.putExtra("userEmail",userEmail);
