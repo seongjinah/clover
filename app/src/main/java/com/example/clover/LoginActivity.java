@@ -1,6 +1,7 @@
 package com.example.clover;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
     DatabaseReference mDatabaseReference = Database.getReference();
     FirebaseAuth mAuth= FirebaseAuth.getInstance();
 
+    SharedPreferences autologin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,25 @@ public class LoginActivity extends AppCompatActivity {
 
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate);
         Logo.startAnimation(animation);
+
+        //자동로그인
+        autologin = getSharedPreferences("autologin",MODE_PRIVATE);
+        String autoID = autologin.getString("inputID",null);
+        String autoPW = autologin.getString("inputPW",null);
+
+        if(mAuth.getCurrentUser()!=null){
+            Log.d("autologin111","start");
+            FirebaseUser user = mAuth.getCurrentUser();
+            Intent music = new Intent(this,MusicService.class);
+            startService(music);
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else if (autoID != null && autoPW != null) {
+            Log.d("autologin222","start");
+            Login(autoID, autoPW);
+        }
 
         button_signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,28 +97,39 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,"비밀번호를 입력하세요",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    mAuth.signInWithEmailAndPassword(id, pw)
-                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        FirebaseUser user = mAuth.getCurrentUser();
-                                        Emailcheck(user);
-                                    } else {
-                                        Toast.makeText(LoginActivity.this,"로그인 오류",Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
+                    Login(id,pw);
                 }
             }
         });
 
     }
+
+    private void Login(final String id, final String pw){
+        mAuth.signInWithEmailAndPassword(id, pw)
+                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            SharedPreferences.Editor autologin_editor = autologin.edit();
+                            autologin_editor.putString("inputId", id);
+                            autologin_editor.putString("inputPW", pw);
+                            autologin_editor.apply();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Emailcheck(user);
+                        } else {
+                            Toast.makeText(LoginActivity.this,"로그인 오류",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
     public void Emailcheck(FirebaseUser user){
         if(user!=null){
             boolean emailVerified=user.isEmailVerified();
             if(emailVerified){
                 Log.d("useremail : ",user.getEmail());
+                Intent music = new Intent(this,MusicService.class);
+                startService(music);
                 Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                 intent.putExtra("userEmail",user.getEmail());
                 startActivity(intent);

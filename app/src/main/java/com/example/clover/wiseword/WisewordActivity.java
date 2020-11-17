@@ -13,11 +13,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.clover.DiaryActivity;
+import com.example.clover.LoginActivity;
 import com.example.clover.R;
 import com.example.clover.WorryThrowActivity;
+import com.example.clover.WritediaryActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +32,8 @@ public class WisewordActivity extends AppCompatActivity implements NavigationVie
     androidx.appcompat.widget.Toolbar toolbar;
     ViewPager2 viewPager;
     TabLayout tabLayout;
+
+    private FirebaseAuth mAuth= FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +56,6 @@ public class WisewordActivity extends AppCompatActivity implements NavigationVie
         /*Navigation Drawer Menu*/
         //Hide or show item
         Menu menu = navigationView.getMenu();
-        menu.findItem(R.id.nav_logout).setVisible(false);
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigations_drawer_open, R.string.navigations_drawer_close);
@@ -81,6 +85,13 @@ public class WisewordActivity extends AppCompatActivity implements NavigationVie
             case R.id.nav_wrongthrow:
                 Intent intent3 = new Intent(WisewordActivity.this, WorryThrowActivity.class);
                 startActivity(intent3);
+                finish();
+                break;
+
+            case R.id.nav_logout:
+                mAuth.signOut();
+                Intent intent4 = new Intent(WisewordActivity.this, LoginActivity.class);
+                startActivity(intent4);
                 finish();
                 break;
         }

@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -42,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     DatabaseReference mDatabaseReference = mDatabase.getReference();
     ArrayList<String> wiseword_category = new ArrayList<String>(Arrays.asList("자신감", "행복", "희망", "사랑"));
+
+    SharedPreferences autologin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,7 +140,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_logout:
+                autologin =getSharedPreferences("autologin", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor autologin_editor=autologin.edit();
+                autologin_editor.clear();
+                autologin_editor.commit();
                 mAuth.signOut();
+                Intent music = new Intent(this,MusicService.class);
+                stopService(music);
                 Intent intent4 = new Intent(MainActivity.this,LoginActivity.class);
                 intent4.putExtra("userEmail",userEmail);
                 startActivity(intent4);
