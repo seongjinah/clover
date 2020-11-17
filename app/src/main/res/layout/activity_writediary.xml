@@ -31,7 +31,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,6 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/title_writediary"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="18dp"
                 android:fontFamily="@font/womanflower"
                 android:padding="20dp"
@@ -50,69 +52,92 @@
                 android:layout_gravity="center|top"
                 android:textSize="30dp" />
 
-            <EditText
-                android:layout_width="320dp"
-                android:layout_height="70dp"
-                android:id="@+id/edittext_title"
-                android:background="@color/colorPrimaryLight"
-                android:layout_marginTop="30dp"
-                android:hint="일기 제목"
-                android:textColorHint="@color/colorPrimaryDark"
-                android:layout_gravity="center"
-                android:fontFamily="@font/womanflower"
-                android:textSize="22dp"/>
-
-            <EditText
-                android:layout_width="320dp"
-                android:layout_height="70dp"
-                android:id="@+id/edittext_date"
-                android:background="@color/colorPrimaryLight"
-                android:layout_marginTop="30dp"
-                android:textColorHint="@color/colorPrimaryDark"
-                android:layout_gravity="center"
-                android:fontFamily="@font/womanflower"
-                android:textSize="22dp"/>
-
-            <EditText
-                android:layout_width="320dp"
-                android:layout_height="280dp"
-                android:id="@+id/edittext_write"
-                android:background="@color/colorPrimaryLight"
-                android:layout_marginTop="30dp"
-                android:hint="오늘의 하루"
-                android:textColorHint="@color/colorPrimaryDark"
-                android:layout_gravity="center"
-                android:fontFamily="@font/womanflower"
-                android:textSize="22dp"/>
-
-            <Button
-                android:layout_width="300dp"
-                android:layout_height="60dp"
-                android:id="@+id/button_save"
-                android:layout_marginTop="15dp"
-                android:text="저장하기"
-                android:fontFamily="@font/womanflower"
-                android:onClick="register"
-                android:textSize="30dp"
-                android:layout_gravity="center"
-                android:background="@drawable/edge"
-                android:textColor="#ffffff"/>
-
-            <Button
-                android:layout_width="300dp"
-                android:layout_height="60dp"
-                android:id="@+id/button_delete"
-                android:layout_marginTop="15dp"
-                android:text="삭제하기"
-                android:fontFamily="@font/womanflower"
-                android:onClick="delete"
-                android:textSize="30dp"
-                android:layout_gravity="center"
-                android:background="@drawable/edge"
-                android:textColor="#ffffff"/>
         </LinearLayout>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:layout_width="320dp"
+                    android:layout_height="70dp"
+                    android:id="@+id/edittext_title"
+                    android:background="@color/colorPrimaryLight"
+                    android:layout_marginTop="30dp"
+                    android:hint="일기 제목"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/womanflower"
+                    android:textSize="22dp"/>
+
+                <EditText
+                    android:layout_width="320dp"
+                    android:layout_height="70dp"
+                    android:id="@+id/edittext_date"
+                    android:background="@color/colorPrimaryLight"
+                    android:layout_marginTop="30dp"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/womanflower"
+                    android:textSize="22dp"/>
+
+                <ImageView
+                    android:id="@+id/imageViewAddNameContest"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="30dp"
+                    android:onClick="onClickAddNameContest"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/img_icon" />
+
+                <EditText
+                    android:layout_width="320dp"
+                    android:layout_height="280dp"
+                    android:id="@+id/edittext_write"
+                    android:background="@color/colorPrimaryLight"
+                    android:layout_marginTop="30dp"
+                    android:hint="오늘의 하루"
+                    android:textColorHint="@color/colorPrimaryDark"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/womanflower"
+                    android:textSize="22dp"/>
+
+                <Button
+                    android:layout_width="300dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/button_save"
+                    android:layout_marginTop="15dp"
+                    android:text="저장하기"
+                    android:fontFamily="@font/womanflower"
+                    android:onClick="onClickAddNameContest"
+                    android:textSize="30dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/edge"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
+
+                <Button
+                    android:layout_width="300dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/button_delete"
+                    android:layout_marginTop="15dp"
+                    android:text="삭제하기"
+                    android:fontFamily="@font/womanflower"
+                    android:onClick="delete"
+                    android:textSize="30dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/edge"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 

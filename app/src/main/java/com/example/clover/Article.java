@@ -10,6 +10,7 @@ public class Article {
     private String title;
     private String write;
     private String userEmail;
+    private String uri_image;
 
     Article() {
         id = "";
@@ -17,14 +18,16 @@ public class Article {
         title = "";
         write = "";
         userEmail = "";
+        uri_image="";
     }
 
-    Article(String id, String date, String title, String write,String userEmail) {
+    Article(String id, String date, String title, String write,String userEmail, String uri_image) {
         this.id = id;
         this.date = date;
         this.title = title;
         this.write = write;
         this.userEmail = userEmail;
+        this.uri_image = uri_image;
     }
 
     public String getid() {
@@ -67,5 +70,12 @@ public class Article {
         this.userEmail = userEmail;
     }
 
+    public String geturi_image() {
+        return uri_image;
+    }
+
+    public void seturi_image(String uri_image) {
+        this.uri_image = uri_image;
+    }
 
 }

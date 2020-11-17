@@ -58,7 +58,6 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
         navigationView = findViewById(R.id.navigationview_diary);
         toolbar = findViewById(R.id.toolbar_diary);
 
-
         Intent it = getIntent();
         userEmail = it.getStringExtra("userEmail");
 
@@ -104,7 +103,7 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
 
         mAdapter = new ArticleAdapter(articleList);
         recyclerView.setAdapter(mAdapter);
-        Toast.makeText(DiaryActivity.this, "생성완료", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(DiaryActivity.this, "생성완료", Toast.LENGTH_SHORT).show();
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new ClickListener() {
             public void onClick(View view, int position) {
