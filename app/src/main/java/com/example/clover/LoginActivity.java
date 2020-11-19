@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         Logo=(ImageView)findViewById(R.id.Login_img);
         mContext=this;
 
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_logo);
         Logo.startAnimation(animation);
 
         //자동로그인
@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent music = new Intent(this,MusicService.class);
             startService(music);
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            intent.putExtra("userEmail",user.getEmail());
             startActivity(intent);
             finish();
         }

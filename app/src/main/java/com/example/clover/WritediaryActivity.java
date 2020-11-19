@@ -198,7 +198,6 @@ public class WritediaryActivity extends AppCompatActivity implements NavigationV
 
         //권한 체크
         if (TextUtils.isEmpty(temp) == false) {
-
             ActivityCompat.requestPermissions(this, temp.trim().split(" "),1);
         }
         else {
