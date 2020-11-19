@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth mAuth= FirebaseAuth.getInstance();
     String userEmail;
     Button button;
+    TextView tv;
     TextView random_wiseword;
     String str_wiseword;
     int random1;
@@ -82,37 +83,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             }
         });
-        int random = (int)(Math.random()*4);
-        String str_category = wiseword_category.get(random);
-        mDatabaseReference.child("Wise_Saying").child(str_category).addListenerForSingleValueEvent(new ValueEventListener() {
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                long size = snapshot.getChildrenCount();
-                random1 = (int)(Math.random()*size);
-            }
 
+         tv = findViewById(R.id.main_random_text);
+        tv.setOnClickListener(new Button.OnClickListener() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onClick(View view) {
+                set_text();
             }
-
         });
 
-        mDatabaseReference.child("Wise_Saying").child(str_category).addListenerForSingleValueEvent(new ValueEventListener() {
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                long size = snapshot.getChildrenCount();
-                int random1 = (int)(Math.random()*size);
-                Saying tmp = snapshot.child(String.valueOf(random1)).getValue(Saying.class);
-                str_wiseword = tmp.getSaying();
-                random_wiseword.setText(str_wiseword);
-            }
+        set_text();
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-
-        });
-
-        //random으로 명언 띄우기
-        random_wiseword = findViewById(R.id.main_random_text);
     }
 
     @Override
@@ -156,5 +137,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void set_text(){
+        int random = (int)(Math.random()*4);
+        String str_category = wiseword_category.get(random);
+        mDatabaseReference.child("Wise_Saying").child(str_category).addListenerForSingleValueEvent(new ValueEventListener() {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long size = snapshot.getChildrenCount();
+                random1 = (int)(Math.random()*size);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+
+        });
+
+        mDatabaseReference.child("Wise_Saying").child(str_category).addListenerForSingleValueEvent(new ValueEventListener() {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long size = snapshot.getChildrenCount();
+                int random1 = (int)(Math.random()*size);
+                Saying tmp = snapshot.child(String.valueOf(random1)).getValue(Saying.class);
+                str_wiseword = tmp.getSaying();
+                random_wiseword.setText(str_wiseword);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+
+        });
+
+        //random으로 명언 띄우기
+        random_wiseword = findViewById(R.id.main_random_text);
     }
 }

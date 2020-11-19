@@ -100,7 +100,8 @@ public class WorryThrowActivity extends AppCompatActivity implements NavigationV
         return true;
     }
 
-    public void delete_worry(View v){
+    public void delete_worry(View v)
+    {
         et_worry.setText("");
     }
 }
