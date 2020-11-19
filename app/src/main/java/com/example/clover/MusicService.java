@@ -1,6 +1,11 @@
 package com.example.clover;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -9,6 +14,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +49,30 @@ public class MusicService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d("Service","start!!");
         if(mp==null){
+            //////////////////////////////////////////알림창//////////////////////////////////////////////////////////////////////////
+            Intent mMainIntent = new Intent(this,MainActivity.class);
+            PendingIntent mPendingIntent = PendingIntent.getActivity(this,1,mMainIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+            NotificationManager notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationCompat.Builder mBuilder=null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                String channelID="channel_01";
+                String channelName="MyChannel01";
+                NotificationChannel channel= new NotificationChannel(channelID,channelName,NotificationManager.IMPORTANCE_DEFAULT);
+                notificationManager.createNotificationChannel(channel);
+                mBuilder=new NotificationCompat.Builder(this, channelID);
+            }else{
+                mBuilder= new NotificationCompat.Builder(this, null);
+            }
+            mBuilder.setSmallIcon(R.drawable.clover4)
+                    .setContentTitle("Clover")
+                    .setContentText("음악 재생 중")
+                    .setContentIntent(mPendingIntent)
+                    .setAutoCancel(true);
+            NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            mNotifyMgr.notify(001,mBuilder.build());
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             mDbRef.child("Music").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {

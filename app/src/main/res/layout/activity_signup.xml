@@ -23,6 +23,8 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signup_id_layout"
         android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -32,8 +34,6 @@
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
             android:fontFamily="@font/font"
             android:hint="이메일"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -42,6 +42,8 @@
         android:id="@+id/signup_pw_layout"
         android:layout_width="match_parent"
         android:fontFamily="@font/font"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -49,8 +51,6 @@
             android:id="@+id/signup_pw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
             android:padding="10dp"
             android:fontFamily="@font/font"
             android:hint="비밀번호"

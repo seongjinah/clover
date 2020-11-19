@@ -1,5 +1,7 @@
 package com.example.clover;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     Button button_signin,button_signup,button_chgpw;
     EditText edit_id,edit_pw;
     ImageView Logo;
+    Context mContext;
 
     FirebaseDatabase Database = FirebaseDatabase.getInstance();
     DatabaseReference mDatabaseReference = Database.getReference();
@@ -45,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         button_signup=(Button)findViewById(R.id.button_signup);
         button_chgpw=(Button)findViewById(R.id.button_chgpw);
         Logo=(ImageView)findViewById(R.id.Login_img);
+        mContext=this;
 
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate);
         Logo.startAnimation(animation);
@@ -91,10 +96,30 @@ public class LoginActivity extends AppCompatActivity {
                 String id=edit_id.getText().toString().trim();
                 String pw=edit_pw.getText().toString().trim();
                 if(id.equals("")){
-                    Toast.makeText(LoginActivity.this,"이메일을 입력하세요",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginActivity.this,"이메일을 입력하세요",Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder builder =new AlertDialog.Builder(mContext);
+                    builder.setTitle("로그인 오류").setMessage("아이디를 입력하세요");
+                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                 }
                 else if(pw.equals("")){
-                    Toast.makeText(LoginActivity.this,"비밀번호를 입력하세요",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginActivity.this,"비밀번호를 입력하세요",Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder builder =new AlertDialog.Builder(mContext);
+                    builder.setTitle("로그인 오류").setMessage("비밀번호를 입력하세요");
+                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                 }
                 else{
                     Login(id,pw);
@@ -117,7 +142,16 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Emailcheck(user);
                         } else {
-                            Toast.makeText(LoginActivity.this,"로그인 오류",Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder builder =new AlertDialog.Builder(mContext);
+                            builder.setTitle("로그인 오류").setMessage("아이디 또는 비밀번호가 틀렸습니다");
+                            builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    edit_pw.setText("");
+                                }
+                            });
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
                         }
                     }
                 });
