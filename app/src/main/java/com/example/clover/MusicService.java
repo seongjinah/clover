@@ -57,7 +57,7 @@ public class MusicService extends Service {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 String channelID="channel_01";
                 String channelName="MyChannel01";
-                NotificationChannel channel= new NotificationChannel(channelID,channelName,NotificationManager.IMPORTANCE_DEFAULT);
+                NotificationChannel channel= new NotificationChannel(channelID,channelName,NotificationManager.IMPORTANCE_LOW);
                 notificationManager.createNotificationChannel(channel);
                 mBuilder=new NotificationCompat.Builder(this, channelID);
             }else{
@@ -66,8 +66,8 @@ public class MusicService extends Service {
             mBuilder.setSmallIcon(R.drawable.clover4)
                     .setContentTitle("Clover")
                     .setContentText("음악 재생 중")
-                    .setContentIntent(mPendingIntent)
-                    .setAutoCancel(true);
+                    .setContentIntent(mPendingIntent);
+                    //.setAutoCancel(true);
             NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             mNotifyMgr.notify(001,mBuilder.build());
 

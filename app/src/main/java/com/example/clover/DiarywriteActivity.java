@@ -65,6 +65,12 @@ public class DiarywriteActivity extends AppCompatActivity implements NavigationV
                 Intent intent3 = new Intent(DiarywriteActivity.this, WorryThrowActivity.class);
                 startActivity(intent3);
                 break;
+
+            case R.id.nav_music:
+                Intent intent5 = new Intent(DiarywriteActivity.this,MusicActivity.class);
+                //intent5.putExtra("userEmail",userEmail);
+                startActivity(intent5);
+                break;
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

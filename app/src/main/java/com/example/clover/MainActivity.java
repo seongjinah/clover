@@ -133,6 +133,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent4);
                 finish();
                 break;
+
+            case R.id.nav_music:
+                Intent intent5 = new Intent(MainActivity.this,MusicActivity.class);
+                intent5.putExtra("userEmail",userEmail);
+                startActivity(intent5);
+                break;
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

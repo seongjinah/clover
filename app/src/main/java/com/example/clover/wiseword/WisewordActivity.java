@@ -16,6 +16,8 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.clover.DiaryActivity;
 import com.example.clover.LoginActivity;
+import com.example.clover.MainActivity;
+import com.example.clover.MusicActivity;
 import com.example.clover.MusicService;
 import com.example.clover.R;
 import com.example.clover.WorryThrowActivity;
@@ -102,6 +104,12 @@ public class WisewordActivity extends AppCompatActivity implements NavigationVie
                 Intent intent4 = new Intent(WisewordActivity.this, LoginActivity.class);
                 startActivity(intent4);
                 finish();
+                break;
+
+            case R.id.nav_music:
+                Intent intent5 = new Intent(WisewordActivity.this, MusicActivity.class);
+                //intent5.putExtra("userEmail",userEmail);
+                startActivity(intent5);
                 break;
         }
 
