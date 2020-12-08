@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -108,6 +112,23 @@ public class WorryThrowActivity extends AppCompatActivity implements NavigationV
 
     public void delete_worry(View v)
     {
-        et_worry.setText("");
+        Animation ani= AnimationUtils.loadAnimation(this,R.anim.delete_text);
+        et_worry.startAnimation(ani);
+
+        ani.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                et_worry.setText("");
+                Animation ani2= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.delete_text2);
+                et_worry.startAnimation(ani2);
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
     }
 }

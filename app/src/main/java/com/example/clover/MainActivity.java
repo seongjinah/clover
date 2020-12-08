@@ -10,13 +10,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.clover.text_animation.Typewriter;
 import com.example.clover.wiseword.Saying;
 import com.example.clover.wiseword.WisewordActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -27,6 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -38,8 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth mAuth= FirebaseAuth.getInstance();
     String userEmail;
     Button button;
-    TextView tv;
-    TextView random_wiseword;
+    Typewriter random_wiseword;
     String str_wiseword;
     int random1;
     FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
@@ -84,15 +88,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-         tv = findViewById(R.id.main_random_text);
-        tv.setOnClickListener(new Button.OnClickListener() {
+        random_wiseword = (Typewriter)findViewById(R.id.random_wiseword);
+        random_wiseword.setClickable(false);
+        set_text();
+
+        random_wiseword.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                random_wiseword.setClickable(false);
                 set_text();
             }
         });
-
-        set_text();
 
     }
 
@@ -166,7 +172,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 int random1 = (int)(Math.random()*size);
                 Saying tmp = snapshot.child(String.valueOf(random1)).getValue(Saying.class);
                 str_wiseword = tmp.getSaying();
-                random_wiseword.setText(str_wiseword);
+                random_wiseword.setCharacterDelay(150);
+                random_wiseword.animateText(str_wiseword);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        random_wiseword.setClickable(true);
+                    }
+                }, 150*str_wiseword.length()+1000);
+
             }
 
             @Override
@@ -175,7 +190,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         });
 
-        //random으로 명언 띄우기
-        random_wiseword = findViewById(R.id.main_random_text);
     }
 }

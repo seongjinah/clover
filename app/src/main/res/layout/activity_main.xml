@@ -39,10 +39,10 @@
             android:layout_centerInParent="true"
             android:orientation="vertical">
 
-            <TextView
+            <com.example.clover.text_animation.Typewriter
                 android:layout_width="300dp"
                 android:layout_height="300dp"
-                android:id="@+id/main_random_text"
+                android:id="@+id/random_wiseword"
                 android:background="@color/colorPrimaryLight"
                 android:text=""
                 android:textSize="30dp"

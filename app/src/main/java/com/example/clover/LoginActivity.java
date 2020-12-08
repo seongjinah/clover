@@ -51,6 +51,12 @@ public class LoginActivity extends AppCompatActivity {
         Logo=(ImageView)findViewById(R.id.Login_img);
         mContext=this;
 
+        String sfName="save";
+        SharedPreferences sf =getSharedPreferences(sfName, MODE_PRIVATE);
+        String str = sf.getString("email", "");
+        edit_id.setText(str);
+
+
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_logo);
         Logo.startAnimation(animation);
 
@@ -65,6 +71,13 @@ public class LoginActivity extends AppCompatActivity {
             Intent music = new Intent(this,MusicService.class);
             startService(music);
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            
+            //email 저장
+            sf =getSharedPreferences(sfName, MODE_PRIVATE);
+            SharedPreferences.Editor editor = sf.edit();
+            editor.putString("email",user.getEmail() );
+            editor.commit();
+            
             intent.putExtra("userEmail",user.getEmail());
             startActivity(intent);
             finish();
