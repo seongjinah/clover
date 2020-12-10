@@ -64,8 +64,9 @@ public class ConfidenceActivity extends Fragment {
             public void onClick(View view, int position) {
                 Saying article = sayinglist.get(position);
                 Intent intent;
-                intent = new Intent(getContext(), DiaryActivity.class);
+                intent = new Intent(getContext(), WiseWord_Click.class);
                 intent.putExtra("it_saying",article.getSaying());
+                intent.putExtra("it_author",article.getAuthor());
                 startActivity(intent);
                 getActivity().finish();
                 return;
@@ -108,51 +109,6 @@ public class ConfidenceActivity extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        /*recyclerView = getView().findViewById(R.id.confidence_recyclerView);
-        linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
-        recyclerView.setHasFixedSize(true);
-        wisewordRVAdapter = new WisewordRVAdapter(sayinglist);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(wisewordRVAdapter);
-
-        recyclerView.addOnItemTouchListener(new ConfidenceActivity.RecyclerTouchListener(getActivity(), recyclerView, new DiaryActivity.ClickListener() {
-            public void onClick(View view, int position) {
-                Saying article = sayinglist.get(position);
-                Intent intent;
-                intent = new Intent(getActivity(), DiaryActivity.class);
-                intent.putExtra("it_saying",article.getSaying());
-                startActivity(intent);
-                return;
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-                return;
-            }
-        }));
-
-        dataRef.child("자신감").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                sayinglist.clear();
-                for(DataSnapshot snap : snapshot.getChildren()){
-                    Saying tmp = snap.getValue(Saying.class);
-                    sayinglist.add(tmp);
-                }
-                wisewordRVAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-        // 데이터 불러오고
-        //그 다음
-        wisewordRVAdapter.notifyDataSetChanged();
-        */
-
     }
 
     public interface ClickListener {

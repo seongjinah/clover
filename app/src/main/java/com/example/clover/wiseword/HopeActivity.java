@@ -74,9 +74,11 @@ public class HopeActivity extends Fragment {
             public void onClick(View view, int position) {
                 Saying article = sayinglist.get(position);
                 Intent intent;
-                intent = new Intent(getActivity(), DiaryActivity.class);
+                intent = new Intent(getContext(), WiseWord_Click.class);
                 intent.putExtra("it_saying",article.getSaying());
+                intent.putExtra("it_author",article.getAuthor());
                 startActivity(intent);
+                getActivity().finish();
                 return;
             }
 

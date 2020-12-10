@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     public void run() {
                         random_wiseword.setClickable(true);
                     }
-                }, 150*str_wiseword.length()+500);
+                }, 150*str_wiseword.length()+1000);
 
             }
 

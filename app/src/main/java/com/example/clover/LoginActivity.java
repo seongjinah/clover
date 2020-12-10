@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     Button button_signin,button_signup,button_chgpw;
     EditText edit_id,edit_pw;
     ImageView Logo;
+    String sfName;
     Context mContext;
 
     FirebaseDatabase Database = FirebaseDatabase.getInstance();
@@ -51,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         Logo=(ImageView)findViewById(R.id.Login_img);
         mContext=this;
 
-        String sfName="save";
+        sfName="save";
         SharedPreferences sf =getSharedPreferences(sfName, MODE_PRIVATE);
         String str = sf.getString("email", "");
         edit_id.setText(str);
@@ -71,14 +72,6 @@ public class LoginActivity extends AppCompatActivity {
             Intent music = new Intent(this,MusicService.class);
             startService(music);
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-            
-            //email 저장
-            sf =getSharedPreferences(sfName, MODE_PRIVATE);
-            SharedPreferences.Editor editor = sf.edit();
-            editor.putString("email",user.getEmail() );
-            editor.commit();
-            
-            intent.putExtra("userEmail",user.getEmail());
             startActivity(intent);
             finish();
         }
@@ -155,6 +148,11 @@ public class LoginActivity extends AppCompatActivity {
                             autologin_editor.apply();
                             FirebaseUser user = mAuth.getCurrentUser();
                             Emailcheck(user);
+                            //email 저장
+                            SharedPreferences sf =getSharedPreferences(sfName, MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sf.edit();
+                            editor.putString("email",id );
+                            editor.commit();
                         } else {
                             AlertDialog.Builder builder =new AlertDialog.Builder(mContext);
                             builder.setTitle("로그인 오류").setMessage("아이디 또는 비밀번호가 틀렸습니다");
