@@ -70,6 +70,74 @@
                 android:onClick="MusicStop"/>
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/music_text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="20dp"
+            android:ellipsize="marquee"
+            android:fontFamily="@font/womanflower"
+            android:gravity="center_horizontal"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:text="MusicName"
+            android:textSize="30dp"
+            android:background="@drawable/green_round_rectangle"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            android:layout_margin="20dp">
+
+            <TextView
+                android:id="@+id/musicname1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/womanflower"
+                android:gravity="center_horizontal"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:text="Corndogs in Santa Monica - The Great North Sound Society"
+                android:textSize="30dp"
+                android:onClick="Music1"
+                android:clickable="true"/>
+
+            <TextView
+                android:id="@+id/musicname2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/womanflower"
+                android:gravity="center_horizontal"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:text="Find Your Way Beat - Nana Kwabena"
+                android:textSize="30dp"
+                android:onClick="Music2"
+                android:clickable="true"/>
+
+            <TextView
+                android:id="@+id/musicname3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/womanflower"
+                android:gravity="center_horizontal"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:text="She No Dull Beat - Nana Kwabena"
+                android:textSize="30dp"
+                android:onClick="Music3"
+                android:clickable="true"/>
+
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

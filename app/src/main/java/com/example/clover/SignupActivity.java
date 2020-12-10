@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,9 +26,10 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SignupActivity extends AppCompatActivity {
 
     Button btn_signup;
-    TextInputEditText editId,editPw;
+    TextInputEditText editId,editPw, editRePw;
     TextInputLayout layout_id,layout_pw;
     boolean isValid=true;
+    ImageView check;
 
     FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     DatabaseReference mDatabaseReference = mDatabase.getReference();
@@ -41,6 +45,8 @@ public class SignupActivity extends AppCompatActivity {
         editPw=(TextInputEditText) findViewById(R.id.signup_pw);
         layout_id=(TextInputLayout)findViewById(R.id.signup_id_layout);
         layout_pw=(TextInputLayout)findViewById(R.id.signup_pw_layout);
+        editRePw=(TextInputEditText) findViewById(R.id.signup_repw);
+        check = (ImageView) findViewById(R.id.signup_check);
 
         layout_pw.setPasswordVisibilityToggleEnabled(true);
 
@@ -55,6 +61,36 @@ public class SignupActivity extends AppCompatActivity {
                 if(isValid) {
                     signupUser(id, pw);
                 }
+            }
+        });
+
+        editRePw.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(editPw.getText().toString().equals(editRePw.getText().toString())) check.setImageResource(R.drawable.check);
+                else check.setImageResource(R.drawable.x);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
+
+        editPw.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(editPw.getText().toString().equals(editRePw.getText().toString())) check.setImageResource(R.drawable.check);
+                else check.setImageResource(R.drawable.x);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
             }
         });
     }

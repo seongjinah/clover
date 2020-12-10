@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,6 +10,7 @@
     android:background="@color/colorPrimary">
 
     <TextView
+        android:id="@+id/signup_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="회원가입"
@@ -23,10 +24,10 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signup_id_layout"
         android:layout_marginTop="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/signup_text">
 
         <com.google.android.material.textfield.TextInputEditText
             android:background="@drawable/green_white_filled_rectangle"
@@ -40,11 +41,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/signup_pw_layout"
-        android:layout_width="match_parent"
+        android:layout_width="310dp"
         android:fontFamily="@font/font"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/signup_id_layout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:background="@drawable/green_white_filled_rectangle"
@@ -57,9 +58,38 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/signup_repw_layout"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/font"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/signup_pw_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:background="@drawable/green_white_filled_rectangle"
+            android:id="@+id/signup_repw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:fontFamily="@font/font"
+            android:hint="비밀번호 재확인"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/signup_check"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="3dp"
+        android:layout_toRightOf="@+id/signup_repw_layout"
+        android:layout_alignBottom="@+id/signup_repw_layout"/>
+
     <Button
         android:background="@drawable/green_filled_rectangle"
         android:id="@+id/button_signup_signup"
+        android:layout_below="@+id/signup_repw_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
@@ -69,8 +99,4 @@
         android:textColor="#fff"
         android:text="회원가입" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"/>
-
-</LinearLayout>
+</RelativeLayout>
