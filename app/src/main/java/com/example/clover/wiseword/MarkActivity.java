@@ -1,13 +1,7 @@
 package com.example.clover.wiseword;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -15,8 +9,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.clover.DiaryActivity;
-import com.example.clover.MainActivity;
 import com.example.clover.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,19 +25,20 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ConfidenceActivity extends Fragment {
+public class MarkActivity extends Fragment {
 
-    static ConfidenceActivity instance;
+    static MarkActivity instance;
     RecyclerView recyclerView;
+    String userEmail;
     LinearLayoutManager linearLayoutManager;
     WisewordRVAdapter wisewordRVAdapter;
     ArrayList<Saying> sayinglist = new ArrayList();
     DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference("Wise_Saying");
-    public ConfidenceActivity() {
+    public MarkActivity() {
     }
 
-    public static ConfidenceActivity getInstance(){
-        if(instance == null) instance = new ConfidenceActivity();
+    public static MarkActivity getInstance(){
+        if(instance == null) instance = new MarkActivity();
         return instance;
     }
 
@@ -50,37 +50,7 @@ public class ConfidenceActivity extends Fragment {
     @Nullable
     @Override //화면 보여주기
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_confidence, container, false);
-
-
-        recyclerView = view.findViewById(R.id.confidence_recyclerView);
-        linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
-        recyclerView.setHasFixedSize(true);
-        wisewordRVAdapter = new WisewordRVAdapter(getContext(),sayinglist);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(wisewordRVAdapter);
-
-        dataRef.child("자신감").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                sayinglist.clear();
-                for(DataSnapshot snap : snapshot.getChildren()){
-                    Saying tmp = snap.getValue(Saying.class);
-                    tmp.setcategory("자신감");
-                    sayinglist.add(tmp);
-                }
-                wisewordRVAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-        // 데이터 불러오고
-        //그 다음
-        wisewordRVAdapter.notifyDataSetChanged();
-
+        View view = inflater.inflate(R.layout.activity_love, container, false);
         return view;
     }
 
@@ -92,6 +62,91 @@ public class ConfidenceActivity extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        recyclerView = getView().findViewById(R.id.love_recyclerView);
+        linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+        recyclerView.setHasFixedSize(true);
+        wisewordRVAdapter = new WisewordRVAdapter(getContext(),sayinglist);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(wisewordRVAdapter);
+        String sfName="save";
+        SharedPreferences sf = getActivity().getSharedPreferences(sfName, Context.MODE_PRIVATE);
+        userEmail = sf.getString("email", "");
+
+        dataRef.child("사랑").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                sayinglist.clear();
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    Saying tmp = snap.getValue(Saying.class);
+                    tmp.setcategory("사랑");
+                    if(tmp.getId().contains(userEmail)){
+                        sayinglist.add(tmp);
+                    }
+                }
+                wisewordRVAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        dataRef.child("희망").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    Saying tmp = snap.getValue(Saying.class);
+                    tmp.setcategory("희망");
+                    if(tmp.getId().contains(userEmail)){
+                        sayinglist.add(tmp);
+                    }
+                }
+                wisewordRVAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        dataRef.child("행복").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    Saying tmp = snap.getValue(Saying.class);
+                    tmp.setcategory("행복");
+                    if(tmp.getId().contains(userEmail)){
+                        sayinglist.add(tmp);
+                    }
+                }
+                wisewordRVAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        dataRef.child("자신감").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot snap : snapshot.getChildren()){
+                    Saying tmp = snap.getValue(Saying.class);
+                    tmp.setcategory("자신감");
+                    if(tmp.getId().contains(userEmail)){
+                        sayinglist.add(tmp);
+                    }
+                }
+                wisewordRVAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        // 데이터 불러오고
+        //그 다음
+        wisewordRVAdapter.notifyDataSetChanged();
     }
 
     public interface ClickListener {
@@ -135,5 +190,6 @@ public class ConfidenceActivity extends Fragment {
         @Override
         public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
         }
+
     }
 }

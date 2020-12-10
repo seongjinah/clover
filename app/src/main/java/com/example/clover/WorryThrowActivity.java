@@ -1,6 +1,8 @@
 package com.example.clover;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -32,6 +35,7 @@ public class WorryThrowActivity extends AppCompatActivity implements NavigationV
     private FirebaseAuth mAuth= FirebaseAuth.getInstance();
     String userEmail;
 
+    Context mContext;
     ImageView trashcan;
     EditText et_worry;
 
@@ -50,6 +54,8 @@ public class WorryThrowActivity extends AppCompatActivity implements NavigationV
 
         Intent it = getIntent();
         userEmail = it.getStringExtra("userEmail");
+
+        mContext = this;
 
         /*Navigation Drawer Menu*/
         //Hide or show item
@@ -115,6 +121,21 @@ public class WorryThrowActivity extends AppCompatActivity implements NavigationV
 
     public void delete_worry(View v)
     {
+        String str_worry = et_worry.getText().toString().trim();
+        if(str_worry.equals("")){
+            AlertDialog.Builder builder =new AlertDialog.Builder(mContext);
+            builder.setTitle("고민이 없어요").setMessage("고민을 작성해주세요");
+            builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+            return;
+        }
+
         trashcan.setClickable(false);
         Animation ani= AnimationUtils.loadAnimation(this,R.anim.delete_text);
         et_worry.startAnimation(ani);
@@ -135,7 +156,7 @@ public class WorryThrowActivity extends AppCompatActivity implements NavigationV
                     public void run() {
                         trashcan.setClickable(true);
                     }
-                }, 8500);
+                }, 2500);
             }
             @Override
             public void onAnimationRepeat(Animation animation) {

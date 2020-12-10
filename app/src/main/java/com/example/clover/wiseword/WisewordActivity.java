@@ -37,6 +37,7 @@ public class WisewordActivity extends AppCompatActivity implements NavigationVie
     androidx.appcompat.widget.Toolbar toolbar;
     ViewPager2 viewPager;
     TabLayout tabLayout;
+    Integer position;
 
     private FirebaseAuth mAuth= FirebaseAuth.getInstance();
 
@@ -54,7 +55,7 @@ public class WisewordActivity extends AppCompatActivity implements NavigationVie
         WiseWordAdapter wiseWordAdapter = new WiseWordAdapter(this);
         viewPager.setAdapter(wiseWordAdapter);
         viewPager.setSaveEnabled(false);
-        final ArrayList<String> tab_index = new ArrayList<String>(Arrays.asList("자신감", "행복", "희망", "사랑"));
+        final ArrayList<String> tab_index = new ArrayList<String>(Arrays.asList("자신감", "행복", "희망", "사랑", "즐겨찾기"));
         new TabLayoutMediator(tabLayout, viewPager,
                 (tab, position) -> tab.setText(tab_index.get(position))).attach();
 

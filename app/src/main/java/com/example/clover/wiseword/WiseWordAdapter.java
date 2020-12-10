@@ -18,12 +18,13 @@ public class WiseWordAdapter extends FragmentStateAdapter {
             case 1: return HappyActivity.getInstance();
             case 2: return HopeActivity.getInstance();
             case 3: return LoveActivity.getInstance();
+            case 4: return MarkActivity.getInstance();
         }
         return null;
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 5;
     }
 }

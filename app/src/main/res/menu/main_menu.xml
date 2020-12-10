@@ -23,13 +23,13 @@
             android:icon="@drawable/trashcan"/>
 
         <item
-            android:id="@+id/nav_logout"
-            android:title="Logout"
-            android:icon="@drawable/logout"/>
-
-        <item
             android:id="@+id/nav_music"
             android:title="음악"
             android:icon="@drawable/ic_music"/>
+
+        <item
+            android:id="@+id/nav_logout"
+            android:title="Logout"
+            android:icon="@drawable/logout"/>
     </group>
 </menu>

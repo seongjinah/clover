@@ -65,27 +65,9 @@ public class HappyActivity extends Fragment {
         recyclerView = getView().findViewById(R.id.happy_recyclerView);
         linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setHasFixedSize(true);
-        wisewordRVAdapter = new WisewordRVAdapter(sayinglist);
+        wisewordRVAdapter = new WisewordRVAdapter(getContext(),sayinglist);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(wisewordRVAdapter);
-
-        recyclerView.addOnItemTouchListener(new HappyActivity.RecyclerTouchListener(getActivity(), recyclerView, new DiaryActivity.ClickListener() {
-            public void onClick(View view, int position) {
-                Saying article = sayinglist.get(position);
-                Intent intent;
-                intent = new Intent(getContext(), WiseWord_Click.class);
-                intent.putExtra("it_saying",article.getSaying());
-                intent.putExtra("it_author",article.getAuthor());
-                startActivity(intent);
-                getActivity().finish();
-                return;
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-                return;
-            }
-        }));
 
         dataRef.child("행복").addValueEventListener(new ValueEventListener() {
             @Override
@@ -93,6 +75,7 @@ public class HappyActivity extends Fragment {
                 sayinglist.clear();
                 for(DataSnapshot snap : snapshot.getChildren()){
                     Saying tmp = snap.getValue(Saying.class);
+                    tmp.setcategory("행복");
                     sayinglist.add(tmp);
                 }
                 wisewordRVAdapter.notifyDataSetChanged();
