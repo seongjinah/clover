@@ -2,6 +2,7 @@ package com.example.clover;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -58,8 +59,13 @@ public class DiaryActivity extends AppCompatActivity implements NavigationView.O
         navigationView = findViewById(R.id.navigationview_diary);
         toolbar = findViewById(R.id.toolbar_diary);
 
-        Intent it = getIntent();
-        userEmail = it.getStringExtra("userEmail");
+        /*Intent it = getIntent();
+        userEmail = it.getStringExtra("userEmail");*/
+
+        String sfName="save";
+        SharedPreferences sf =getSharedPreferences(sfName, MODE_PRIVATE);
+        userEmail = sf.getString("email", "");
+
 
         /*Navigation Drawer Menu*/
         //Hide or show item

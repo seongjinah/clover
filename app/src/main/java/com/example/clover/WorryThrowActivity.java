@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ public class WorryThrowActivity extends AppCompatActivity implements NavigationV
     private FirebaseAuth mAuth= FirebaseAuth.getInstance();
     String userEmail;
 
+    ImageView trashcan;
     EditText et_worry;
 
     @Override
@@ -44,6 +46,7 @@ public class WorryThrowActivity extends AppCompatActivity implements NavigationV
         toolbar = findViewById(R.id.toolbar_worrythrow);
 
         et_worry = (EditText)findViewById(R.id.edittext_worrythrow);
+        trashcan = (ImageView)findViewById(R.id.trashcan);
 
         Intent it = getIntent();
         userEmail = it.getStringExtra("userEmail");
@@ -112,6 +115,7 @@ public class WorryThrowActivity extends AppCompatActivity implements NavigationV
 
     public void delete_worry(View v)
     {
+        trashcan.setClickable(false);
         Animation ani= AnimationUtils.loadAnimation(this,R.anim.delete_text);
         et_worry.startAnimation(ani);
 
@@ -125,6 +129,13 @@ public class WorryThrowActivity extends AppCompatActivity implements NavigationV
                 et_worry.setText("");
                 Animation ani2= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.delete_text2);
                 et_worry.startAnimation(ani2);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        trashcan.setClickable(true);
+                    }
+                }, 8500);
             }
             @Override
             public void onAnimationRepeat(Animation animation) {

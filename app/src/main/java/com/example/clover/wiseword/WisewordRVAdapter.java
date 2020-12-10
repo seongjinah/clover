@@ -1,13 +1,17 @@
 package com.example.clover.wiseword;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clover.DiaryActivity;
+import com.example.clover.MainActivity;
 import com.example.clover.R;
 
 import java.util.ArrayList;
@@ -38,11 +42,16 @@ public class WisewordRVAdapter extends RecyclerView.Adapter<WisewordRVAdapter.Vi
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        TextView wiseword = itemView.findViewById(R.id.wrapper_wiseword);
-        TextView author = itemView.findViewById(R.id.wrapper_author);
+        public  TextView wiseword;
+        public  TextView author;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            // 뷰 객체에 대한 참조. (hold strong reference)
+            this.wiseword = itemView.findViewById(R.id.wrapper_wiseword);
+            this.author = itemView.findViewById(R.id.wrapper_author);
         }
+
     }
 }

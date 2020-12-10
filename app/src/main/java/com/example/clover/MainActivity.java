@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     SharedPreferences autologin;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     public void run() {
                         random_wiseword.setClickable(true);
                     }
-                }, 150*str_wiseword.length()+1000);
+                }, 150*str_wiseword.length()+500);
 
             }
 
