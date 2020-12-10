@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".wiseword.WiseWord_Click">
+
+    <ImageView
+        android:id="@+id/wisewordclick_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background1"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#33000000"/>
+
+
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:src="@drawable/postit2"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/wisewordclick_saying"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:text="흔들리지 않고 피는 꽃이 어디있으랴"
+        android:textSize="30dp"
+        android:fontFamily="@font/womanflower"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/wisewordclick_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wisewordclick_saying"
+        android:layout_alignRight="@+id/wisewordclick_saying"
+        android:text="작가"
+        android:textSize="24dp"
+        android:fontFamily="@font/womanflower"
+        android:gravity="center"/>
+
+
+</RelativeLayout>
