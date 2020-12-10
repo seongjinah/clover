@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -38,11 +39,20 @@ public class MusicService extends Service {
     final ArrayList<String> music = new ArrayList<>();
     int num = 0;
     int size;
+    boolean changeindex=false;
+
+    IBinder mBinder = new MyBinder();
+
+    class MyBinder extends Binder {
+        MusicService getService(){
+            return MusicService.this;
+        }
+    }
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return mBinder;
     }
 
     @Override
@@ -109,6 +119,7 @@ public class MusicService extends Service {
     MediaPlayer.OnCompletionListener completionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
+            changeindex=true;
             num=(num+1)%size;
             mp.reset();
             mp.release();
@@ -121,6 +132,7 @@ public class MusicService extends Service {
                 e.printStackTrace();
             }
             mp.start();
+            changeindex=false;
             mp.setOnCompletionListener(completionListener);
         }
     };
@@ -135,5 +147,47 @@ public class MusicService extends Service {
             Log.d("Service","end!!");
         }
         super.onDestroy();
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+        if(mp==null){
+            mp = new MediaPlayer();
+            mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            try {
+                mp.setDataSource(music.get(num));
+                mp.prepare();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //mp.setLooping(false);
+            mp.start();
+
+            mp.setOnCompletionListener(completionListener);
+        }
+        else {
+            changeindex=true;
+            mp.reset();
+            mp.release();
+            mp=null;
+            mp = new MediaPlayer();
+            try {
+                mp.setDataSource(music.get(num));
+                mp.prepare();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            mp.start();
+            changeindex=false;
+            mp.setOnCompletionListener(completionListener);
+        }
+    }
+
+    public boolean isChangeindex() {
+        return changeindex;
     }
 }
